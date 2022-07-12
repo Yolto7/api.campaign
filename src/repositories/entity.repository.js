@@ -14,7 +14,8 @@ class EntityRepository {
   }
 
   async get() {
-    return await this.model.find();
+    const data = await this.model.find();
+    return (data.length > 0) ? data : null;
   }
 
   async create(entity) {
@@ -23,7 +24,7 @@ class EntityRepository {
   }
 
   async update(id, entity) {
-    return await this.model.findByIdAndUpdate(id, entity);
+    return await this.model.findByIdAndUpdate(id, entity, { new: true });
   }
 
   async delete(id) {
